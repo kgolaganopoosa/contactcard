@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petal Chain - Digital Contact Card</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .glass-card {
+            background: linear-gradient(135deg, #000000 0%, #1e3a8a 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        body {
+            background-color: #0f172a;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-white font-sans">
+
+    <nav class="w-full py-4 px-6 bg-black/50 border-b border-white/10 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                <i data-lucide="layers" class="w-5 h-5"></i>
+            </div>
+            <span class="font-bold text-lg tracking-tight">Petal Chain <span class="text-blue-500">- Contact Card</span></span>
+        </div>
+        <div class="hidden md:flex gap-6 text-sm text-gray-400">
+            <a href="#" class="hover:text-white transition">Home</a>
+            <a href="#" class="hover:text-white transition">Network</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex flex-col items-center justify-center p-6">
+        
+        <div class="glass-card w-full max-w-md rounded-[2rem] p-8 shadow-2xl transform transition hover:scale-[1.02]">
+            <div class="flex flex-col items-center">
+                <div class="relative mb-6">
+                    <div class="w-32 h-32 rounded-full border-4 border-blue-500/30 p-1">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=300&h=300" 
+                             alt="Profile" 
+                             class="w-full h-full rounded-full object-cover">
+                    </div>
+                </div>
+
+                <h1 class="text-2xl font-bold mb-1">Kgolagano</h1>
+                <p class="text-blue-400 font-medium mb-6">Graphic Designer & Web Developer</p>
+
+                <div class="w-full space-y-4 text-sm text-gray-200">
+                    <div class="flex items-center gap-4 p-3 rounded-xl bg-white/5">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-blue-400"></i>
+                        <span>Shakung, Pretoria, GP</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-3 rounded-xl bg-white/5">
+                        <i data-lucide="phone" class="w-5 h-5 text-blue-400"></i>
+                        <span>+27 12 345 6789</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-3 rounded-xl bg-white/5">
+                        <i data-lucide="mail" class="w-5 h-5 text-blue-400"></i>
+                        <span>hello@petalchain.co.za</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="downloadVCard()" class="mt-8 flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-2xl shadow-lg transition-all active:scale-95">
+            <i data-lucide="user-plus" class="w-5 h-5"></i>
+            Save to Phone Book
+        </button>
+
+    </main>
+
+    <footer class="w-full py-8 px-6 bg-black text-center border-t border-white/5">
+        <p class="text-gray-500 text-xs mb-2">© 2026 Petal Chain Digital Solutions</p>
+        <p class="text-gray-600 text-[10px] uppercase tracking-widest">Built for the South African Youth Economy</p>
+    </footer>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Function to create and download VCF file
+        function downloadVCard() {
+            const vcard = "BEGIN:VCARD\n" +
+                          "VERSION:3.0\n" +
+                          "FN:Kgolagano\n" +
+                          "ORG:Petal Chain\n" +
+                          "TITLE:Graphic Designer & Web Developer\n" +
+                          "TEL;TYPE=CELL:+27123456789\n" +
+                          "EMAIL:hello@petalchain.co.za\n" +
+                          "ADR;TYPE=WORK:;;Shakung;Pretoria;Gauteng;;South Africa\n" +
+                          "END:VCARD";
+
+            const blob = new Blob([vcard], { type: "text/vcard" });
+            const url = window.URL.createObjectURL(blob);
+            const newLink = document.createElement("a");
+            newLink.href = url;
+            newLink.setAttribute("download", "Kgolagano_Contact.vcf");
+            newLink.click();
+        }
+    </script>
+</body>
+</html>
